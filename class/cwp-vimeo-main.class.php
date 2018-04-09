@@ -149,6 +149,7 @@ class Clients_WP_Vimeo{
         global $pages;
 
         foreach($pages as $page) {
+            $page_content = nl2br($page);
             if (strpos($page, '[cwp_') !== FALSE) {
                 $args = array(
                     'meta_key' => '_clients_page_shortcode',
@@ -197,12 +198,16 @@ class Clients_WP_Vimeo{
                                 $vimeo = new Vimeo($app_key, $app_secret);
                                 $result = $vimeo->request('/users/'.$user_id.'/albums/'.$root_folder.'/videos');
 
+                                ob_start();
                                 include_once(CWPV_PATH_INCLUDES . '/cwp-vimeo-table.php');
+                                $page_content .= ob_get_clean();
                             }
                         }
                     }
                 }
             }
+
+            return $page_content;
         }
     } 
 }
