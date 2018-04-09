@@ -22,7 +22,7 @@ class Clients_WP_Vimeo{
         add_action('admin_init', array($this, 'get_vimeo_user_credentials'));
         add_action('admin_enqueue_scripts', array( $this, 'cwp_vimeo_add_admin_scripts' ));
         add_action('wp_enqueue_scripts', array($this, 'cwp_vimeo_add_wp_scripts'), 20, 1);
-        add_filter('the_content', array($this, 'folder_content_table'), 6);
+        add_filter('the_content', array($this, 'folder_content_table'));
         add_action('wp_ajax_vimeo_list_albums', array($this, 'vimeo_list_albums'));
         if(isset($_SESSION['vimeo_error_msg'])) {
             $this->vimeo_error($_SESSION['vimeo_error_msg']);
